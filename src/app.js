@@ -73,7 +73,6 @@ class Superwar {
                 return new Player(index, player, "villain");
             }
         });
-    }
 
     }
 
