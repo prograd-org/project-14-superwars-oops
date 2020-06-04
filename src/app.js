@@ -65,7 +65,7 @@ class Superwar {
         // Use Map method to loop through players argument and create new players
         // Type your code here
 
-        this.players = players.map((player, index) => {
+        this.players = players.map((player, index) => 
             if (index % 2 == 0) {
                 return new Player(index, player, "hero");
             }
