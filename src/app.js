@@ -1,8 +1,9 @@
+
 const PLAYERS = [
     "Spiderman",
     "Captain America",
     "Wonderwoman",
-    // "Popcorn",
+    "Popcorn",
     // "Gemwoman",
     // "Bolt",
     // "Antwoman",
@@ -20,12 +21,19 @@ const PLAYERS = [
     // "Vader",
     // "Slingo"
 ];
-
+// new
 // Player Class
 class Player {
     constructor(id, name, type) {
         // Create member variables and assign values
         // Type your code
+        // ============================
+        this.id = id;
+        this.name = name;
+        this.image = "images/super-" + (id + 1) + ".png";
+        this.strength = this.getRandomStrength();
+        this.type = type;
+        // =================================
 
     }
 
@@ -38,9 +46,16 @@ class Player {
     view = () => {
         // Accumulate HTML template
         // Type your code here
-
-    
-        return player;
+        var wrapper= document.createElement('div');
+        
+        let player = `<div class="player" data-id="${this.id}">
+            <img src="${this.image}">
+            <div class="name">${this.name}</div>
+            <div class="strength">${this.strength}</div>
+        </div>`
+        wrapper.innerHTML = player;
+        return wrapper.firstChild;
+        // return player
     }
 }
 
@@ -51,6 +66,17 @@ class Superwar {
     // Use Map method to loop through players argument and create new players
     // Type your code here
 
+    this.players = players.map((player, index)=>{
+            if(index % 2 == 0) { 
+                return new Player(index, player, "hero"); 
+            }
+            else{
+                return new Player(index, player, "villain");
+            }
+        });
+     //==============
+        
+    //===============
     }
 
     // Display players in HTML
@@ -59,6 +85,7 @@ class Superwar {
         team.innerHTML = '';
         let fragment =
             this.buildPlayers('hero');
+            console.log(fragment)
         team.append(fragment);
 
         team = document.getElementById('villains');
@@ -73,7 +100,10 @@ class Superwar {
         let fragment = document.createDocumentFragment();
         this.players
             .filter(player => player.type == type)
-            .forEach(player => fragment.append(player.view()));
+            .forEach((player) => {
+                console.log(player.view());
+                fragment.append(player.view())
+            });
         return fragment;
     }
 
@@ -82,5 +112,6 @@ class Superwar {
 
 window.onload = () => {
     const superwar = new Superwar(PLAYERS);
+    console.log(superwar);
     superwar.viewPlayers();
 }
