@@ -2,23 +2,23 @@ const PLAYERS = [
     "Spiderman",
     "Captain America",
     "Wonderwoman",
-    // "Popcorn",
-    // "Gemwoman",
-    // "Bolt",
-    // "Antwoman",
-    // "Mask",
-    // "Tiger",
-    // "Captain",
-    // "Catwoman",
-    // "Fish",
-    // "Hulk",
-    // "Ninja",
-    // "Black Cat",
-    // "Volverine",
-    // "Thor",
-    // "Slayer",
-    // "Vader",
-    // "Slingo"
+    "Popcorn",
+    "Gemwoman",
+    "Bolt",
+    "Antwoman",
+    "Mask",
+    "Tiger",
+    "Captain",
+    "Catwoman",
+    "Fish",
+    "Hulk",
+    "Ninja",
+    "Black Cat",
+    "Volverine",
+    "Thor",
+    "Slayer",
+    "Vader",
+    "Slingo"
 ];
 
 // Player Class
@@ -30,7 +30,6 @@ class Player {
         this.name=name;
         this.strength=this.getRandomStrength()
         this.image = `images/super-${id + 1}.png` 
-        
         this.type=type;
     }
 
@@ -43,15 +42,26 @@ class Player {
     view = () => {
         // Accumulate HTML template
         // Type your code here
-        let player = document.createElement('div');
-        let template = `<div class="player" data-id="${this.id}">
-            <img src="${this.image}">
-            <div class="name">${this.name}</div>
-            <div class="strength">${this.strength}</div>
-        </div>`
+        // let player = document.createElement('div');
+        // let template = `<div class="player" data-id="${this.id}">
+        //     <img src="${this.image}">
+        //     <div class="name">${this.name}</div>
+        //     <div class="strength">${this.strength}</div>
+        // </div>`
+        // player.innerHTML = template
 
-
-        player.innerHTML = template
+        let player = document.createElement('div')
+        player.classList.add('player')
+        player.setAttribute('data-id',this.id)
+        var img = document.createElement('img')
+        img.setAttribute('src',this.image)
+        var name = document.createElement('div')
+        name.classList.add('name')
+        name.textContent=this.name
+        var strength = document.createElement('div')
+        strength.classList.add('strength')
+        strength.textContent=this.strength
+        player.append(img,name,strength)
         return player;
     }
 }
