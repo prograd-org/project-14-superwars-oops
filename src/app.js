@@ -26,6 +26,13 @@ class Player {
     constructor(id, name, type) {
         // Create member variables and assign values
         // Type your code
+        
+            this.id = id;
+            this.name = name;
+            this.image = "images/super-" + (id + 1) + ".png";
+            this.strength = getRandomStrength();
+            this.type = type;
+        }
 
     }
 
@@ -35,21 +42,36 @@ class Player {
     }
 
     // Create a player for displaying
-    view = () => {
-        // Accumulate HTML template
-        // Type your code here
-
     
-        return player;
-    }
+view=()=>{
+    let player=document.createElement('div');
+    player.classList.add('player')
+    player.setAttribute("data-id",this.id)
+    let img=document.createElement('img');
+    img.setAttribute('src',this.image)
+    let name=document.createElement('h3');
+    name.innerHTML=this.name;
+    let strength=document.createElement('h3');
+    strength.textContent=this.strength;
+    strength.className="strength"
+    player.append(img,name,strength)
+    
+    return player;
 }
-
 // Superwar Class
 class Superwar {
     constructor(players) {
+     this.players=players.map((player,n)=>{
+
+    let type=(n%2==0)?'hero':'villain'
+    return new Player(n,player,type)
+})
+
+
     // Create a field players 
     // Use Map method to loop through players argument and create new players
     // Type your code here
+    
 
     }
 
@@ -72,7 +94,7 @@ class Superwar {
     buildPlayers = (type) => {
         let fragment = document.createDocumentFragment();
         this.players
-            .filter(player => player.type == type)
+           .filter(player => player.type == type)
             .forEach(player => fragment.append(player.view()));
         return fragment;
     }
