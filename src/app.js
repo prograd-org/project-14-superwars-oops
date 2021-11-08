@@ -73,7 +73,7 @@ class Superwar {
 
     }
 
-    // Display players in HTML
+    // Display players in HTML..
     viewPlayers = () => {
         let team = document.getElementById('heroes');
         team.innerHTML = '';
@@ -88,7 +88,7 @@ class Superwar {
         team.append(fragment);
     }
 
-    // Build players fragment 
+    // Build players fragment.. 
     buildPlayers = (type) => {
         let fragment = document.createDocumentFragment();
         this.players
