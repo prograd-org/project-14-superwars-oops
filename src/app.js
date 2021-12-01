@@ -26,8 +26,12 @@ class Player {
     constructor(id, name, type) {
         // Create member variables and assign values
         // Type your code
-
-    }
+        this.id = id;
+        this.name = name;
+        this.strength = this.getRandomStrength();
+        this.image = "images/super-"+(id+1)+ ".png" ;
+        this.type = type; 
+        }
 
     // getting random strength
     getRandomStrength = () => {
@@ -38,20 +42,40 @@ class Player {
     view = () => {
         // Accumulate HTML template
         // Type your code here
-
-    
+        let player = document.createElement("div");
+        player.classList.add("player");
+        player.setAttribute('data-id', this.id);
+        
+        let image = document.createElement("img");
+        image.setAttribute("src", this.image);
+      
+        let name = document.createElement("div");
+        name.classList.add("name");
+        name.innerHTML = this.name;
+      
+        let strength = document.createElement("div");
+        strength.classList.add("strength");
+        strength.innerHTML = this.strength;
+      
+        player.append(image, name, strength);
+      
         return player;
     }
 }
 
+
 // Superwar Class
 class Superwar {
-    constructor(players) {
+    constructor(players){
     // Create a field players 
     // Use Map method to loop through players argument and create new players
     // Type your code here
-
+    this.players = players.map((item, id) =>{
+        let type= (id%2 ==0)? "hero" : "villain";
+        return new Player(id, item, type);
+    });
     }
+
 
     // Display players in HTML
     viewPlayers = () => {
@@ -78,8 +102,7 @@ class Superwar {
     }
 
 }
-
-
+    
 window.onload = () => {
     const superwar = new Superwar(PLAYERS);
     superwar.viewPlayers();
