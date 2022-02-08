@@ -20,6 +20,7 @@ const PLAYERS = [
     // "Vader",
     // "Slingo"
 ];
+
 // Player Class
 class Player {
     constructor(id, name, type) {
